@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<ThermalConfig>
+	<config_version>0.1</config_version>
+	<sensor>
+		<sensor_name>cpu sensor</sensor_name>
+		<sensor_file>/sys/class/thermal/thermal_zone1/temp</sensor_file>
+		<polling_delay>2000</polling_delay>
+		<AvgPeriod>120000</AvgPeriod>
+		<zone_level id = "0" type = "cool">
+			<temp>30000</temp>
+			<trip id="0" >
+				<action name="cpu" arg="0,4,1350000,1350000,1050000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+			</trip>
+			<trip id="1" >
+				<action name="cpu" arg="1,4,1500000,1350000,1000000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+				<action name="charge" arg="0" file="/sys/class/power_supply/battery/chg_cool_state" />
+				<action name="brightness" arg="100" file="" />
+			</trip>
+		</zone_level>
+		<zone_level id="1" type="active">
+			<temp>60000</temp>
+			<trip id="0" >
+				<action name="cpu" arg="2,4,1350000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+				<action name="charge_cur" arg="1050" file="/sys/class/power_supply/battery/adjust_cur_min" />
+				<action name="charge" arg="1" file="/sys/class/power_supply/battery/chg_cool_state" />
+				<action name="brightness" arg="100" file="" />
+			</trip>
+			<trip id="1" >
+				<action name="cpu" arg="3,4,900000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+				<action name="charge_cur" arg="850" file="/sys/class/power_supply/battery/adjust_cur_min" />
+				<action name="charge" arg="1" file="/sys/class/power_supply/battery/chg_cool_state" />
+				<action name="brightness" arg="80" file="" />
+			</trip>
+			<trip id="2" >
+				<action name="charge_cur" arg="750" file="/sys/class/power_supply/battery/adjust_cur_min" />
+				<action name="charge" arg="1" file="/sys/class/power_supply/battery/chg_cool_state" />
+				<action name="brightness" arg="65" file="" />
+			</trip>
+			<trip id="3" >
+				<action name="charge_cur" arg="650" file="/sys/class/power_supply/battery/adjust_cur_min" />
+				<action name="charge" arg="1" file="/sys/class/power_supply/battery/chg_cool_state" />
+				<action name="brightness" arg="50" file="" />
+			</trip>
+			<trip id="4" >
+				<action name="charge_cur" arg="550" file="/sys/class/power_supply/battery/adjust_cur_min" />
+				<action name="charge" arg="1" file="/sys/class/power_supply/battery/chg_cool_state" />
+			</trip>
+		</zone_level>
+		<zone_level id = "3" type = "hot">
+			<temp>85000</temp>
+			<trip id="0" >
+				<action name="cpu" arg="4,3,900000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+				<action name="charge_stop" arg="0" file="/sys/class/power_supply/battery/stop_charge" />
+			</trip>
+		</zone_level>
+		<zone_level id = "4" type = "hot">
+			<temp>95000</temp>
+			<trip id="0" >
+				<action name="cpu" arg="5,2,900000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+				<action name="charge_stop" arg="1" file="/sys/class/power_supply/battery/stop_charge" />
+			</trip>
+		</zone_level>
+		<zone_level id = "5" type = "hot">
+			<temp>105000</temp>
+			<trip id="0" >
+				<action name="cpu" arg="6,1,900000" file="/sys/class/thermal/cooling_device0/cur_ctrl_param" />
+			</trip>
+		</zone_level>
+		<zone_level id="6" type="critical">
+			<temp>110000</temp>
+			<trip id ="0" >
+				<action name="shutdown" arg="" file=""/>
+			</trip>
+		</zone_level>
+	</sensor>
+</ThermalConfig>
